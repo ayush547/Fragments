@@ -29,13 +29,6 @@ public class Controller extends Fragment {
         // Required empty public constructor
     }
 
-    public interface ControllerListener{
-        void onSaveClicked(String input);
-        void update();
-        void setSize();
-        void size(float size);
-    }
-
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,7 +56,7 @@ public class Controller extends Fragment {
                 isBold = true;
                 isItalic = false;
                 isUnderline = false;
-                bold.setTypeface(null, Typeface.ITALIC);
+                bold.setTypeface(null, Typeface.BOLD_ITALIC);
                 italics.setTypeface(null, Typeface.NORMAL);
                 underline.setTypeface(null, Typeface.NORMAL);
                 listener.update();
@@ -76,7 +69,7 @@ public class Controller extends Fragment {
                 isItalic = true;
                 isUnderline = false;
                 bold.setTypeface(null, Typeface.NORMAL);
-                italics.setTypeface(null, Typeface.ITALIC);
+                italics.setTypeface(null, Typeface.BOLD_ITALIC);
                 underline.setTypeface(null, Typeface.NORMAL);
                 listener.update();
             }
@@ -89,7 +82,7 @@ public class Controller extends Fragment {
                 isUnderline = true;
                 bold.setTypeface(null, Typeface.NORMAL);
                 italics.setTypeface(null, Typeface.NORMAL);
-                underline.setTypeface(null, Typeface.ITALIC);
+                underline.setTypeface(null, Typeface.BOLD_ITALIC);
                 listener.update();
             }
         });
@@ -97,21 +90,25 @@ public class Controller extends Fragment {
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.setSize();
-                size-=0.2;
-                listener.size(size);
+                listener.size(false);
             }
         });
 
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.setSize();
-                size+=0.2;
-                listener.size(size);
+                listener.size(true);
             }
         });
         return view;
+    }
+
+    public interface ControllerListener {
+        void onSaveClicked(String input);
+
+        void update();
+
+        void size(Boolean increase);
     }
 
     @Override

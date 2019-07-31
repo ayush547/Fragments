@@ -3,6 +3,7 @@ package com.example.fragments;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 
 import java.lang.reflect.Type;
 
@@ -36,13 +37,12 @@ public class MainActivity extends AppCompatActivity implements Controller.Contro
     }
 
     @Override
-    public void setSize() {
-        controller.size = textViewFragment.getSize();
+    public void size(Boolean increase) {
+        if (increase)
+            textViewFragment.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textViewFragment.textView.getTextSize() + 3.0f);
+        else
+            textViewFragment.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textViewFragment.textView.getTextSize() - 3.0f);
     }
 
-    @Override
-    public void size(float size) {
-        textViewFragment.updateSize(size);
-    }
 
 }
